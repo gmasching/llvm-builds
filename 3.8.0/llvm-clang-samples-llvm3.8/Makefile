@@ -112,7 +112,7 @@ SRC_CUSTOM_DIR := src_custom
 crap: make_builddir \
 	$(BUILDDIR)/crap.so
 
-$(BUILDDIR)/crap.so: $(SRC_CUSTOM_DIR)/crap.cpp
+$(BUILDDIR)/crap.so: $(SRC_CUSTOM_DIR)/crap.cpp $(SRC_CUSTOM_DIR)/KaleidoscopeJIT.h
 	$(CXX) $(PLUGIN_CXXFLAGS) $(CXXFLAGS) $(LLVM_CXXFLAGS) \
 		$^ $(PLUGIN_LDFLAGS) $(LLVM_LDFLAGS_NOLIBS) -o $@
 # End custom stuff
