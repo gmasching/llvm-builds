@@ -26,6 +26,10 @@ extern "C" {
   }
 
   static llvm::orc::KaleidoscopeJIT *TheJIT;
+
+  llvm::TargetMachine & KaleidoscopeGetTargetMachine (){
+    return TheJIT->getTargetMachine();
+  } 
   
   void KaleidoscopeCreate ()
   {
