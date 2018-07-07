@@ -4,6 +4,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 cd "$SCRIPTPATH"/"$1"
 mkdir -p build
 cd build
+rm -rf *
 cmake -G "Ninja" \
       -DCMAKE_BUILD_TYPE=Release \
       -DLLVM_BUILD_TOOLS="ON" \
@@ -17,8 +18,4 @@ cmake -G "Ninja" \
       -DLLVM_PARALLEL_LINK_JOBS="4" \
       -DLLVM_BUILD_LLVM_DYLIB="ON" \
       ../src/
-
-cd ../build
-ninja
-
 
