@@ -47,7 +47,7 @@ extern "C" {
     TheJIT->removeModule(M);
   }
 
-  llvm::orc::JITSymbol KaleidoscopefindSymbol (char* sym){
+  llvm::orc::JITSymbol KaleidoscopeFindSymbol (char* sym){
     return TheJIT->findSymbol(sym);
   }
 
