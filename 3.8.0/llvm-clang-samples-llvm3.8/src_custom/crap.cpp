@@ -5,42 +5,49 @@
 extern "C" {
 #endif
 
-  LLVMBool LLVMInitializeNativeTarget__(void) {
+  LLVMBool LLVMInitializeNativeTarget__()
+  {
     return LLVMInitializeNativeTarget();
   }
 
-  LLVMBool LLVMInitializeNativeAsmParser__(void) {
+  LLVMBool LLVMInitializeNativeAsmParser__()
+  {
     return LLVMInitializeNativeAsmParser();
   }
 
-  LLVMBool LLVMInitializeNativeAsmPrinter__(void) {
+  LLVMBool LLVMInitializeNativeAsmPrinter__()
+  {
     return LLVMInitializeNativeAsmPrinter();
   }
 
-  LLVMBool LLVMInitializeNativeDisassembler__(void) {
+  LLVMBool LLVMInitializeNativeDisassembler__()
+  {
     return LLVMInitializeNativeDisassembler();
   }
 
   static llvm::orc::KaleidoscopeJIT *TheJIT;
   
-  void KaleidoscopeCreate (void){
+  void KaleidoscopeCreate ()
+  {
     TheJIT = new llvm::orc::KaleidoscopeJIT();
   }
 
-  void KaleidoscopeDestroy (){
+  void KaleidoscopeDestroy ()
+  {
     delete TheJIT;
   }
 
-  llvm::orc::KaleidoscopeJIT::ModuleHandleT KaleidoscopeAddModule (std::unique_ptr<llvm::Module> M) {
-    auto ret = TheJIT->addModule(std::move(M));
-    return ret;
+  llvm::orc::KaleidoscopeJIT::ModuleHandleT KaleidoscopeAddModule (llvm::Module* M)
+  {
+    return TheJIT->addModule(M);
   }
 
-  void KaleidoscopeRemoveModule (llvm::orc::KaleidoscopeJIT::ModuleHandleT M) {
+  void KaleidoscopeRemoveModule (llvm::orc::KaleidoscopeJIT::ModuleHandleT M)
+  {
     TheJIT->removeModule(M);
   }
 
-  llvm::orc::JITSymbol KaleidoscopefindSymbol (char *sym){
+  llvm::orc::JITSymbol KaleidoscopefindSymbol (char* sym){
     return TheJIT->findSymbol(sym);
   }
 
