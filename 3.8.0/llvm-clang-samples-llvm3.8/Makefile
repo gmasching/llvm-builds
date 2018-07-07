@@ -103,7 +103,16 @@ CLANG_LIBS := \
 # build artifacts.
 SRC_LLVM_DIR := src_llvm
 SRC_CLANG_DIR := src_clang
+SRC_CUSTOM_DIR := src_custom
 BUILDDIR := build
+
+.PHONY: crap
+crap: make_builddir \
+	$(BUILDDIR)/crap.so
+
+$(BUILDDIR)/crap.so: $(SRC_CUSTOM_DIR)/crap.cpp
+	$(CXX) $(PLUGIN_CXXFLAGS) $(CXXFLAGS) $(LLVM_CXXFLAGS) \
+		$^ $(PLUGIN_LDFLAGS) $(LLVM_LDFLAGS_NOLIBS) -o $@
 
 .PHONY: all
 all: make_builddir \
