@@ -87,7 +87,9 @@ namespace llvm {
       {
 	auto str = mangle(Name);
 	//std::cout << str;
-	return findMangledSymbol(str);
+	auto result = findMangledSymbol(str);
+
+	return result;
       }
 
     private:
