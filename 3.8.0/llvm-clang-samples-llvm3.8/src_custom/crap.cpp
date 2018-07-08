@@ -58,14 +58,14 @@ extern "C" {
   llvm::orc::JITSymbol* KaleidoscopeFindSymbol (const char* sym){
     std::string s(sym);
     auto fuckme = TheJIT->findSymbol(s);
-    std::cout << "fuck me four times";
+    //   std::cout << "fuck me four times";
     wowwow = fuckme;
     return &wowwow;
   }
 
   llvm::orc::TargetAddress KaleidoscopeGetSymbolAddress (llvm::orc::JITSymbol sym){
     auto fuckme = sym.getAddress();
-    std::cout << "fuck me five times";
+    //    std::cout << "fuck me five times";
     return fuckme;
   }
 

@@ -107,7 +107,7 @@ namespace llvm {
       JITSymbol findMangledSymbol(const std::string &Name)
       {
 
-	std::cout << "fuck me once";
+	//	std::cout << "fuck me once";
 	// Search modules in reverse order: from last added to first added.
 	// This is the opposite of the usual search order for dlsym, but makes more
 	// sense in a REPL where we want to bind to the newest available definition.
@@ -119,14 +119,14 @@ namespace llvm {
 	      }
 	  }
 
-	std::cout << "fuck me twice";
+	//	std::cout << "fuck me twice";
 	// If we can't find the symbol in the JIT, try looking in the host process.
 	if (auto SymAddr = RTDyldMemoryManager::getSymbolAddressInProcess(Name))
 	  {
 	    return JITSymbol(SymAddr, JITSymbolFlags::Exported);
 	  }
 
-	std::cout << "fuck me three times";
+	//	std::cout << "fuck me three times";
 	return nullptr;
       }
 
