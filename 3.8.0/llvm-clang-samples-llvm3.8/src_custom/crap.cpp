@@ -1,5 +1,6 @@
 #include "KaleidoscopeJIT.h"
 #include "llvm-c/Target.h"
+#include <iostream>
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,9 +28,10 @@ extern "C" {
 
   static llvm::orc::KaleidoscopeJIT *TheJIT;
 
-  llvm::TargetMachine & KaleidoscopeGetTargetMachine (){
-    return TheJIT->getTargetMachine();
-  } 
+  llvm::TargetMachine* KaleidoscopeGetTargetMachine (){
+    auto wtf = TheJIT->getTargetMachine();
+    return wtf;
+  }
   
   void KaleidoscopeCreate ()
   {
@@ -51,8 +53,16 @@ extern "C" {
     TheJIT->removeModule(M);
   }
 
-  llvm::orc::JITSymbol KaleidoscopeFindSymbol (char* sym){
-    return TheJIT->findSymbol(sym);
+  llvm::orc::JITSymbol KaleidoscopeFindSymbol (const char* sym){
+    auto fuckme = TheJIT->findSymbol(sym);
+    std::cout << "fuck me four times";
+    return fuckme;
+  }
+
+  llvm::orc::TargetAddress KaleidoscopeGetSymbolAddress (llvm::orc::JITSymbol sym){
+    auto fuckme = sym.getAddress();
+    std::cout << "fuck me five times";
+    return fuckme;
   }
 
 #ifdef __cplusplus

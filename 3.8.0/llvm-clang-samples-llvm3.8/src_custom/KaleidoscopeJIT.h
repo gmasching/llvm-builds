@@ -23,6 +23,8 @@
 #include "llvm/IR/Mangler.h"
 #include "llvm/Support/DynamicLibrary.h"
 
+#include <iostream>
+
 namespace llvm {
   namespace orc {
 
@@ -39,9 +41,9 @@ namespace llvm {
 	llvm::sys::DynamicLibrary::LoadLibraryPermanently(nullptr);
       }
 
-      TargetMachine &getTargetMachine ()
+      TargetMachine* getTargetMachine ()
       {
-	return *TM;
+	return TM;
       }
 
       ModuleHandleT addModule (Module* M)
@@ -83,7 +85,9 @@ namespace llvm {
 
       JITSymbol findSymbol(const std::string Name)
       {
-	return findMangledSymbol(mangle(Name));
+	auto str = mangle(Name);
+	//std::cout << str;
+	return findMangledSymbol(str);
       }
 
     private:
@@ -100,6 +104,8 @@ namespace llvm {
 
       JITSymbol findMangledSymbol(const std::string &Name)
       {
+
+	std::cout << "fuck me once";
 	// Search modules in reverse order: from last added to first added.
 	// This is the opposite of the usual search order for dlsym, but makes more
 	// sense in a REPL where we want to bind to the newest available definition.
@@ -111,16 +117,18 @@ namespace llvm {
 	      }
 	  }
 
+	std::cout << "fuck me twice";
 	// If we can't find the symbol in the JIT, try looking in the host process.
 	if (auto SymAddr = RTDyldMemoryManager::getSymbolAddressInProcess(Name))
 	  {
 	    return JITSymbol(SymAddr, JITSymbolFlags::Exported);
 	  }
 
+	std::cout << "fuck me three times";
 	return nullptr;
       }
 
-      std::unique_ptr<TargetMachine> TM;
+      TargetMachine* TM;
       const DataLayout DL;
       ObjLayerT ObjectLayer;
       CompileLayerT CompileLayer;
