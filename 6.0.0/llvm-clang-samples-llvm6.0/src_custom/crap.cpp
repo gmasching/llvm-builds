@@ -53,20 +53,21 @@ extern "C" {
     TheJIT->removeModule(M);
   }
 
-  llvm::orc::JITSymbol wowwow = nullptr;
+  llvm::JITSymbol* wowwow = nullptr;
   
-  llvm::orc::JITSymbol* KaleidoscopeFindSymbol (const char* sym){
+  llvm::JITSymbol* KaleidoscopeFindSymbol (const char* sym){
     std::string s(sym);
-    auto fuckme = TheJIT->findSymbol(s);
+    //   auto fuckme = 
     //   std::cout << "fuck me four times";
-    wowwow = fuckme;
-    return &wowwow;
+    *wowwow = TheJIT->findSymbol(s);
+    return wowwow;
   }
 
-  llvm::orc::TargetAddress KaleidoscopeGetSymbolAddress (llvm::orc::JITSymbol sym){
-    auto fuckme = sym.getAddress();
+  llvm::JITTargetAddress KaleidoscopeGetSymbolAddress (llvm::JITSymbol sym){
+    llvm::Expected<llvm::JITTargetAddress> fuckme = sym.getAddress();
+    auto dearly = *fuckme.operator->();
     //    std::cout << "fuck me five times";
-    return fuckme;
+    return dearly;
   }
 
 #ifdef __cplusplus
