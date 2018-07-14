@@ -53,14 +53,14 @@ extern "C" {
     TheJIT->removeModule(M);
   }
 
-  llvm::JITSymbol* wowwow = nullptr;
+  llvm::JITSymbol wowwow = nullptr;
   
   llvm::JITSymbol* KaleidoscopeFindSymbol (const char* sym){
     std::string s(sym);
-    //   auto fuckme = 
-    //   std::cout << "fuck me four times";
-    *wowwow = TheJIT->findSymbol(s);
-    return wowwow;
+    std::cout << "fuck me fuck you times";
+    wowwow = TheJIT->findSymbol(s);
+    std::cout << "fuck me five times";
+    return &wowwow;
   }
 
   llvm::JITTargetAddress KaleidoscopeGetSymbolAddress (llvm::JITSymbol sym){
