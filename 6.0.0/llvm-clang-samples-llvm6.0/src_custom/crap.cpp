@@ -57,9 +57,9 @@ extern "C" {
   
   llvm::JITSymbol* KaleidoscopeFindSymbol (const char* sym){
     std::string s(sym);
-    std::cout << "fuck me fuck you times";
+    //std::cout << "fuck me fuck you times";
     wowwow = TheJIT->findSymbol(s);
-    std::cout << "fuck me five times";
+    //std::cout << "fuck me five times";
     return &wowwow;
   }
 
