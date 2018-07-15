@@ -26,6 +26,31 @@ extern "C" {
     return LLVMInitializeNativeDisassembler();
   }
 
+  void LLVMInitializeAllTargetInfos__()
+  {
+    return LLVMInitializeAllTargetInfos();
+  }
+
+  void LLVMInitializeAllTargets__()
+  {
+    return LLVMInitializeAllTargets();
+  }
+
+  void LLVMInitializeAllTargetMCs__()
+  {
+    return LLVMInitializeAllTargetMCs();
+  }
+
+  void LLVMInitializeAllAsmParsers__()
+  {
+    return LLVMInitializeAllAsmParsers();
+  }
+
+  void LLVMInitializeAllAsmPrinters__()
+  {
+    return LLVMInitializeAllAsmPrinters();
+  }
+
   static llvm::orc::KaleidoscopeJIT *TheJIT;
 
   llvm::TargetMachine* KaleidoscopeGetTargetMachine (){
